@@ -3,12 +3,9 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
-
-    def print(self):
-         x = self.next
-         while x != None:
-              print(f"{self.val}-->")
-              x = x.next
+class LinkedList:
+    def __init__(self):
+        self.head = None
 
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
@@ -32,7 +29,15 @@ class Solution:
             pass
     
 
-last = ListNode(3)
-head = ListNode(4, last)
 
-head.print()
+head = ListNode(2)
+curr = head
+temp = ListNode(4)
+curr.next = temp
+temp = ListNode(3)
+curr.next = temp
+
+temp = head
+while temp != None:
+    print(f'{temp.val}-->'),
+    temp = temp.next

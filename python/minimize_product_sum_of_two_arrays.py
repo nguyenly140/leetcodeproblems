@@ -18,16 +18,44 @@ class Solution:
 
         # return productSum
 
-        # Priority Queue
-        nums1.sort()
+        # ------------------------ Priority Queue --------------------------
+        # nums1.sort()
 
-        ans = 0
+        # ans = 0
 
-        # initialize max heap (needs to add existing list with "-x for x in 'list'")- empty priorityqueue
-        pq = [-x for x in nums2]
-        heapq.heapify(pq)
+        # # initialize max heap (needs to add existing list with "-x for x in 'list'")- empty priorityqueue
+        # pq = [-x for x in nums2]
+        # heapq.heapify(pq)
+
+        # for i in nums1:
+        #     ans += i * -heapq.heapop(pq)
+
+        # return ans
+    
+        # ------------------------ Counting Sort --------------------------
+        counter1, counter2 = [0] * 101, [0] * 101
+        result = 0
 
         for i in nums1:
-            ans += i * -heapq.heapop(pq)
+            counter1[i] += 1
+        for i in nums2:
+            counter2[i] += 1
 
-        return ans
+        p1, p2 = 1, 100
+        
+
+        while p1 <= 100 and p2 >= 1:
+
+            while p1 <= 100 and counter1[p1] == 0:
+                p1 += 1
+            while p2 >= 1 and counter2[p2] == 0:
+                p2 -= 1
+            if p1 == 101 or p2 == 0:
+                break
+
+            pairResult = min(counter1[p1], counter2[p2])
+            result += pairResult * p1 * p2
+            counter1[p1] -= pairResult
+            counter2[p2] -= pairResult
+
+        return result
